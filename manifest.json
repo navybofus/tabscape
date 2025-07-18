@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Tabscape",
+  "description": "Tabscape replaces your New Tab page with a customizable dashboard for work and play.",
+  "version": "1.0.0",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "author": "HammaLlama",
+  "homepage_url": "https://github.com/HammaLlama/tabscape",
+  "copyright": "© 2025 HammaLlama. All rights reserved."
+}
