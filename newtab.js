@@ -290,7 +290,7 @@ async function renderWeatherWidget() {
     const resp = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(state.weather.city)}`);
     const geo = await resp.json();
     if (geo.results && geo.results[0]) {
-      const { latitude, longitude, name, country } = geo.results[0];
+      const { latitude, longitude, name, country, admin1 } = geo.results[0];
       // Open-Meteo API supports temperature_unit and windspeed_unit
       const tempUnit = state.weatherUnit === 'F' ? 'fahrenheit' : 'celsius';
       const windUnit = state.weatherDistance === 'mph' ? 'mph' : 'kmh';
@@ -312,8 +312,15 @@ async function renderWeatherWidget() {
         }
         const windAbbr = getWindAbbr(windDir);
         // New layout with rotated arrow
+        // Prefer city, state/province if available, else city, country
+        let locationLabel = name;
+        if (admin1 && admin1 !== country) {
+          locationLabel += ", " + admin1;
+        } else {
+          locationLabel += ", " + country;
+        }
         weatherDiv.innerHTML = `
-          <div style="font-weight:bold;font-size:1.08em;margin-bottom:2px;">${name}, ${country}</div>
+          <div style="font-weight:bold;font-size:1.08em;margin-bottom:2px;">${locationLabel}</div>
           <div style="display:grid;grid-template-columns:100px 1fr;align-items:center;gap:0.5rem 1.2rem;margin-bottom:0.5rem;">
             <div style="font-size:3em;line-height:1.1;text-align:center;">${codeInfo.emoji}</div>
             <div style="font-size:2.5em;font-weight:600;line-height:1.1;">${temp}<span style='font-size:0.5em;font-weight:400;'>${tempLabel}</span></div>
