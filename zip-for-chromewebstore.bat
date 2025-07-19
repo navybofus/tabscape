@@ -17,6 +17,7 @@ echo .gitignore>> %EXCLUDEFILE%
 echo *.zip>> %EXCLUDEFILE%
 echo *.bat>> %EXCLUDEFILE%
 echo _tabscape_zip_tmp>> %EXCLUDEFILE%
+echo pages>> %EXCLUDEFILE%
 
 REM Copy all files except excluded to temp folder
 mkdir "%TMPDIR%"
